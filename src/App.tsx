@@ -1,11 +1,23 @@
-import { Button } from "@chakra-ui/react"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
+import PredictionPage from './pages/PredictionPage/PredictionPage';
+import HomePage from './pages/HomePage/HomePage';
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
   return (
-    <div>
-      <Button style={{ padding: '12px 24px', fontSize: '16px' }}>Hello World</Button>
-    </div>
-  )
+    <BrowserRouter>
+      <Box minH="100vh">
+        <NavBar />
+        <Box pt="72px">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/predict" element={<PredictionPage />} />
+          </Routes>
+        </Box>
+      </Box>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

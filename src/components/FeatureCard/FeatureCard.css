@@ -1,0 +1,19 @@
+.feature-card {
+  text-align: center;
+  padding: 2rem;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-title {
+  margin: 1rem 0 0.5rem;
+}
+
+.feature-description {
+  color: #718096;
+}
