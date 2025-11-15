@@ -48,7 +48,7 @@ export default function NavBar() {
                 Model
               </a>
               <a
-                href="https://github.com/your-org/frontend-repo"
+                href="https://github.com/Davi-Paiva/datathon-front"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="github-repo-button"
@@ -56,7 +56,7 @@ export default function NavBar() {
                 Frontend
               </a>
               <a
-                href="https://github.com/your-org/backend-repo"
+                href="https://github.com/ppuig2503/datathon2025-backend-JAPD"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="github-repo-button"
