@@ -17,25 +17,15 @@
   align-items: center;
 }
 
-/* Logo Section */
-.navbar-logo {
-  flex-shrink: 0;
-  padding-left: 10%;
-  transition: transform 0.2s ease;
-  overflow: hidden;
-  height: 48px;
+.product-name{
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
 }
 
-.navbar-logo:hover {
-  transform: scale(1.05);
-}
-
-.navbar-logo img {
-  cursor: pointer;
-  width: 120px;
-  height: 48px;
-  object-fit: cover;
-  object-position: center;
+.product-name:hover{
+    scale: 1.1;
+    transition: all 0.3s ease;
 }
 
 /* Navigation Links Section */
