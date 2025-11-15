@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Box, Container, HStack, Button, Image } from '@chakra-ui/react';
+import { Box, Container, HStack, Button, Text } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 import { useState } from 'react';
 import './NavBar.css';
-import logo from '../../assets/logo.png';
 
 export default function NavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -12,9 +11,9 @@ export default function NavBar() {
       <Container maxW="container.xl" className="navbar-container">
         <HStack justify="space-between" w="full">
           {/* Left Section - Logo */}
-          <Box className="navbar-logo">
+          <Box className='product-name'>
             <Link to="/">
-              <Image src={logo} className="navbar-logo-img" alt="Logo"/>
+                <Text fontWeight="bold" fontSize="xl">VisualizeML</Text>
             </Link>
           </Box>
 
