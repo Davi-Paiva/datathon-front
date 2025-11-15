@@ -87,7 +87,7 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
             <BarChart
               data={negatives}
               layout="vertical"
-              margin={{ top: 10, right: 10, left: 0, bottom: 10 }}
+              margin={{ top: 10, right: 100, left: 0, bottom: 10 }}
             >
               <CartesianGrid
                 strokeDasharray="3 3"
@@ -102,8 +102,9 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
               <YAxis
                 type="category"
                 dataKey="feature"
+                orientation="right"
                 width={200}
-                tick={{ fill: "#ddd", fontSize: 14 }}
+                tick={{ fill: "#ddd", fontSize: 12 }}
               />
               <Tooltip
                 formatter={(value: number) => value.toFixed(3)}
@@ -113,7 +114,7 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
               <Bar dataKey="value" fill="#6ab4ff">
                 <LabelList
                   dataKey="absValue"
-                  position="left"
+                  position="right"
                   formatter={(v) => typeof v === 'number' ? v.toFixed(2) : ''}
                   style={{ fill: "#ddd", fontSize: 12 }}
                 />
@@ -122,22 +123,13 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
           </ResponsiveContainer>
         </div>
 
-        {/* línea central */}
-        <div
-          style={{
-            width: 2,
-            background: "#ccc",
-            opacity: 0.4,
-          }}
-        />
-
         {/* derecha (positivos) */}
         <div style={{ flex: 1, paddingLeft: 10 }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={positives}
               layout="vertical"
-              margin={{ top: 10, right: 0, left: 10, bottom: 10 }}
+              margin={{ top: 10, right: 50, left: 10, bottom: 10 }}
             >
               <CartesianGrid
                 strokeDasharray="3 3"
