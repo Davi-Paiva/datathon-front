@@ -1,7 +1,9 @@
+import { Button } from "@chakra-ui/react"
+
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Button style={{ padding: '12px 24px', fontSize: '16px' }}>Hello World</Button>
     </div>
   )
 }
