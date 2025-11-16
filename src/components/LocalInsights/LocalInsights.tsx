@@ -1,4 +1,4 @@
-import { Box, Heading, Text, VStack } from '@chakra-ui/react';
+import { Box, Heading, VStack } from '@chakra-ui/react';
 import './LocalInsights.css';
 import LimeExplanationSplitChart from '../charts/LimeExplanationChart'
 import AIText from '../../services/AIText';

@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { Box, Text, Spinner, VStack } from "@chakra-ui/react";
 
-const TEXT_API_URL = "http://localhost:8000/ai/text/local";
-
 interface LocalTextResponse {
   text: string;
 }
 
-const AIText: React.FC = () => {
+interface AITextProps {
+  URL: string;
+}
+
+const AIText: React.FC<AITextProps> = ({ URL }) => {
   const [text, setText] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +21,7 @@ const AIText: React.FC = () => {
         setLoading(true);
         setError(null);
 
-        const res = await fetch(TEXT_API_URL, {
+        const res = await fetch(URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -42,7 +44,7 @@ const AIText: React.FC = () => {
     };
 
     fetchLocalText();
-  }, []);
+  }, [URL]);
 
   if (loading) {
     return (
