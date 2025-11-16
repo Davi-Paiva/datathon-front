@@ -115,7 +115,7 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
           />
 
           <Tooltip
-            formatter={(props: any) => {
+            formatter={(_value: any, _name: any, props: any) => {
               const { payload } = props;
               return [
                 `|SHAP|: ${payload.importance.toFixed(4)} (SHAP: ${payload.shap.toFixed(

@@ -17,9 +17,8 @@ export default function ExplainabilityPage() {
               Understand how the model makes its predictions
             </Text>
           </Box>
-
-          <GlobalInsights />
           <LocalInsights />
+          <GlobalInsights />
           <ChatBot />
         </VStack>
       </Container>
