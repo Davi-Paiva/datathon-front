@@ -4,3 +4,7 @@
   background: linear-gradient(to bottom right, #ebf8ff, #faf5ff);
   background-attachment: fixed;
 }
+
+.explainability-container {
+    padding-top: 4rem;
+}
