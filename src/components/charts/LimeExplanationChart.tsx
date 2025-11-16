@@ -77,7 +77,8 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
     };
 
     fetchLimeExplanation();
-  }, [onLoadComplete]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (loading) return <Skeleton height="400px" variant="shine" />;
   if (error) return <div>Error al cargar explicación LIME: {error}</div>;

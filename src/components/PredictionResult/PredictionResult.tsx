@@ -26,7 +26,7 @@ export default function PredictionResult({ prediction }: PredictionResultProps) 
             {prediction}
           </Text>
         </Box>
-        <Link to="/explainability">
+        <Link to={`/explainability?prediction=${Boolean(prediction)}`}>
           <Button 
             colorScheme={isWin ? 'green' : 'red'} 
             size="lg"

@@ -72,9 +72,9 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
     };
 
     fetchShapGlobal();
-  }, [shouldLoad, onLoadComplete]);
+  }, [shouldLoad]);
 
-  if (loading) return <Skeleton height="400px" variant="shine"/>;
+  if (!shouldLoad || loading) return <Skeleton height="400px" />;
   if (error) return <div>Error al cargar SHAP global: {error}</div>;
   if (!data) return null;
 

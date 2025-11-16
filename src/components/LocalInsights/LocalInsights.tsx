@@ -2,7 +2,7 @@ import { Box, Heading, VStack } from '@chakra-ui/react';
 import './LocalInsights.css';
 import LimeExplanationSplitChart from '../charts/LimeExplanationChart';
 import AiText from '../AiText/AiText';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface LocalInsightsProps {
   onLoadComplete?: () => void;
@@ -10,13 +10,21 @@ interface LocalInsightsProps {
 
 export default function LocalInsights({ onLoadComplete }: LocalInsightsProps) {
   const [chartLoaded, setChartLoaded] = useState(false);
+  const [textLoaded, setTextLoaded] = useState(false);
 
-  const handleChartLoad = () => {
-    setChartLoaded(true);
-    if (onLoadComplete) {
+  useEffect(() => {
+    if (chartLoaded && textLoaded && onLoadComplete) {
       onLoadComplete();
     }
-  };
+  }, [chartLoaded, textLoaded, onLoadComplete]);
+
+  const handleChartLoad = useCallback(() => {
+    setChartLoaded(true);
+  }, []);
+
+  const handleTextLoad = useCallback(() => {
+    setTextLoaded(true);
+  }, []);
 
   return (
     <Box className="local-insights-container">
@@ -25,7 +33,7 @@ export default function LocalInsights({ onLoadComplete }: LocalInsightsProps) {
           Local Insights
         </Heading>
         <LimeExplanationSplitChart onLoadComplete={handleChartLoad} />
-        <AiText URL="http://localhost:8000/ai/text/local" shouldLoad={chartLoaded} />
+        <AiText URL="http://localhost:8000/ai/text/local" shouldLoad={chartLoaded} onLoadComplete={handleTextLoad} />
       </VStack>
     </Box>
   );

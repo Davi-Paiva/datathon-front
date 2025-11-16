@@ -2,18 +2,30 @@ import { Box, Heading, VStack } from '@chakra-ui/react';
 import './GlobalInsights.css';
 import ShapFeatureImportanceChart from '../charts/ShapFeatureImportanceChart';
 import AiText from '../AiText/AiText';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface GlobalInsightsProps {
   shouldLoad?: boolean;
+  onLoadComplete?: () => void;
 }
 
-export default function GlobalInsights({ shouldLoad = false }: GlobalInsightsProps) {
+export default function GlobalInsights({ shouldLoad = false, onLoadComplete }: GlobalInsightsProps) {
   const [chartLoaded, setChartLoaded] = useState(false);
+  const [textLoaded, setTextLoaded] = useState(false);
 
-  const handleChartLoad = () => {
+  useEffect(() => {
+    if (chartLoaded && textLoaded && onLoadComplete) {
+      onLoadComplete();
+    }
+  }, [chartLoaded, textLoaded, onLoadComplete]);
+
+  const handleChartLoad = useCallback(() => {
     setChartLoaded(true);
-  };
+  }, []);
+
+  const handleTextLoad = useCallback(() => {
+    setTextLoaded(true);
+  }, []);
 
   return (
     <Box className="global-insights-container">
@@ -22,7 +34,7 @@ export default function GlobalInsights({ shouldLoad = false }: GlobalInsightsPro
           Global Insights
         </Heading>
         <ShapFeatureImportanceChart shouldLoad={shouldLoad} onLoadComplete={handleChartLoad} />
-        <AiText URL="http://localhost:8000/ai/text/global" shouldLoad={chartLoaded} />
+        <AiText URL="http://localhost:8000/ai/text/global" shouldLoad={chartLoaded} onLoadComplete={handleTextLoad} />
       </VStack>
     </Box>
   );
