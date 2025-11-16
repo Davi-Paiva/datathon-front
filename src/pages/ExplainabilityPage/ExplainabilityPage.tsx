@@ -3,6 +3,7 @@ import { Box, Container, Heading, VStack } from '@chakra-ui/react';
 import LocalInsights from '../../components/LocalInsights/LocalInsights';
 import GlobalInsights from '../../components/GlobalInsights/GlobalInsights';
 import './ExplainabilityPageStyles.css';
+import ChatBot from '../../components/ChatBot/ChatBot';
 
 export default function ExplainabilityPage() {
   const [localInsightsComplete, setLocalInsightsComplete] = useState(false);
@@ -22,6 +23,7 @@ export default function ExplainabilityPage() {
 
         <LocalInsights onLoadComplete={handleLocalInsightsComplete} />
         <GlobalInsights shouldLoad={localInsightsComplete} />
+        <ChatBot />
       </VStack>
     </Container>
   );
