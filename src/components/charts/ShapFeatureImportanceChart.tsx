@@ -1,4 +1,5 @@
 
+import { Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
   BarChart,
@@ -14,6 +15,8 @@ import {
 
 interface Props {
   maxFeatures?: number; // por si quieres limitar al top-k
+  onLoadComplete?: () => void;
+  shouldLoad?: boolean;
 }
 
 interface ShapGlobalResponse {
@@ -25,6 +28,8 @@ const API_URL = "http://0.0.0.0:8000/ml/explain_shap_global";
 
 const ShapFeatureImportanceChart: React.FC<Props> = ({
   maxFeatures = 14,
+  onLoadComplete,
+  shouldLoad = true,
 }) => {
   const [data, setData] = useState<ShapGlobalResponse | null>(null);
   const [loading, setLoading] = useState(false);
@@ -32,6 +37,8 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
 
   // Llamada al endpoint al montar el componente
   useEffect(() => {
+    if (!shouldLoad) return ;
+
     const fetchShapGlobal = async () => {
       try {
         setLoading(true);
@@ -50,6 +57,9 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
 
         const json = (await res.json()) as ShapGlobalResponse;
         setData(json);
+        if (onLoadComplete) {
+          onLoadComplete();
+        }
       } catch (err: any) {
         console.error(err);
         setError(err.message ?? "Error al cargar SHAP global");
@@ -59,9 +69,9 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
     };
 
     fetchShapGlobal();
-  }, []);
+  }, [shouldLoad, onLoadComplete]);
 
-  if (loading) return <div>Cargando SHAP global...</div>;
+  if (loading) return <Skeleton height="400px" />;
   if (error) return <div>Error al cargar SHAP global: {error}</div>;
   if (!data) return null;
 

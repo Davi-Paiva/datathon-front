@@ -1,3 +1,4 @@
+import { Skeleton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
   BarChart,
@@ -12,6 +13,7 @@ import {
 
 interface Props {
   maxFeaturesPerSide?: number;
+  onLoadComplete?: () => void;
 }
 
 interface LimeResponse {
@@ -37,6 +39,7 @@ const API_URL = "http://0.0.0.0:8000/ml/explain_lime";
 
 const LimeExplanationSplitChart: React.FC<Props> = ({
   maxFeaturesPerSide = 7,
+  onLoadComplete,
 }) => {
   const [limeData, setLimeData] = useState<LimeResponse | null>(null);
   const [loading, setLoading] = useState(false);
@@ -62,6 +65,9 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
 
         const json = (await res.json()) as LimeResponse;
         setLimeData(json);
+        if (onLoadComplete) {
+          onLoadComplete();
+        }
       } catch (err: any) {
         console.error(err);
         setError(err.message ?? "Error al cargar explicación LIME");
@@ -71,9 +77,9 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
     };
 
     fetchLimeExplanation();
-  }, []);
+  }, [onLoadComplete]);
 
-  if (loading) return <div>Cargando explicación LIME...</div>;
+  if (loading) return <Skeleton height="400px" />;
   if (error) return <div>Error al cargar explicación LIME: {error}</div>;
   if (!limeData) return null;
 
