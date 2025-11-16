@@ -1,16 +1,7 @@
-// src/components/FeatureDetailsModal.tsx
-import React from "react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Text,
-} from "@chakra-ui/react";
+import { useEffect } from "react";
+import { Box, Button, Text, VStack, HStack, Heading } from "@chakra-ui/react";
+import { FaTimes } from "react-icons/fa";
+import "./FeatureDetailsModal.css";
 
 export interface ShapItem {
   feature: string;
@@ -24,41 +15,95 @@ interface FeatureDetailsModalProps {
   onClose: () => void;
 }
 
-const FeatureDetailsModal: React.FC<FeatureDetailsModalProps> = ({
+export default function FeatureDetailsModal({
   isOpen,
   item,
   onClose,
-}) => {
-  if (!item) return null;
+}: FeatureDetailsModalProps) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  if (!isOpen || !item) return null;
+
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Detalle de la feature</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Text fontWeight="bold">Feature:</Text>
-          <Text mb={3}>{item.feature}</Text>
-
-          <Text fontWeight="bold">Importancia media |SHAP|:</Text>
-          <Text mb={3}>{item.importance.toFixed(4)}</Text>
-
-          <Text fontWeight="bold">SHAP medio (con signo):</Text>
-          <Text mb={3}>{item.shap.toFixed(4)}</Text>
-
-          <Text fontSize="sm" color="gray.600">
-            Aquí puedes añadir una explicación más de negocio para esta feature.
-          </Text>
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={onClose} colorScheme="blue">
-            Cerrar
+    <Box className="modal-overlay" onClick={handleOverlayClick}>
+      <Box className="modal-content">
+        <HStack justify="space-between" mb={4}>
+          <Heading size="lg" color="blue.700">
+            Feature Details
+          </Heading>
+          <Button
+            onClick={onClose}
+            variant="ghost"
+            size="sm"
+            className="modal-close-button"
+          >
+            <FaTimes />
           </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
-  );
-};
+        </HStack>
 
-export default FeatureDetailsModal;
+        <VStack align="stretch" gap={4}>
+          <Box>
+            <Text fontWeight="bold" fontSize="sm" color="gray.600" mb={1}>
+              Feature:
+            </Text>
+            <Text fontSize="lg" fontWeight="semibold">
+              {item.feature}
+            </Text>
+          </Box>
+
+          <Box>
+            <Text fontWeight="bold" fontSize="sm" color="gray.600" mb={1}>
+              Average Importance |SHAP|:
+            </Text>
+            <Text fontSize="lg" fontWeight="semibold">
+              {item.importance.toFixed(4)}
+            </Text>
+          </Box>
+
+          <Box>
+            <Text fontWeight="bold" fontSize="sm" color="gray.600" mb={1}>
+              Average SHAP (with sign):
+            </Text>
+            <Text fontSize="lg" fontWeight="semibold" color={item.shap >= 0 ? "green.600" : "red.600"}>
+              {item.shap.toFixed(4)}
+            </Text>
+          </Box>
+
+          <Box
+            bg="blue.50"
+            p={4}
+            borderRadius="md"
+            borderLeft="4px solid"
+            borderColor="blue.400"
+          >
+            <Text fontSize="sm" color="gray.700">
+              This feature contributes to the model's predictions. A positive SHAP value indicates
+              it pushes predictions toward "Win", while negative values push toward "Loss".
+            </Text>
+          </Box>
+        </VStack>
+
+        <HStack justify="flex-end" mt={6}>
+          <Button onClick={onClose} colorScheme="blue" size="lg">
+            Close
+          </Button>
+        </HStack>
+      </Box>
+    </Box>
+  );
+}
