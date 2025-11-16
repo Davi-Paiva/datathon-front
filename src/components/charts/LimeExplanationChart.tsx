@@ -11,7 +11,6 @@ import {
 } from "recharts";
 
 interface Props {
-  explanation: Record<string, number>;
   maxFeaturesPerSide?: number;
 }
 
@@ -27,7 +26,7 @@ type Item = {
   absValue: number;  // magnitud para etiquetas
 };
 
-const API_URL = "https://localhost/ml/explain_lime_local";
+const API_URL = "http://0.0.0.0:8000/ml/explain_lime";
 
 const LimeExplanationSplitChart: React.FC<Props> = ({
   maxFeaturesPerSide = 7,
@@ -44,11 +43,10 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
         setError(null);
 
         const res = await fetch(API_URL, {
-          method: "GET", // o "POST" si tu endpoint lo requiere
+          method: "POST", // o "POST" si tu endpoint lo requiere
           headers: {
             "Content-Type": "application/json",
           },
-          // body: JSON.stringify(payload)  // si necesitas enviar algo
         });
 
         if (!res.ok) {

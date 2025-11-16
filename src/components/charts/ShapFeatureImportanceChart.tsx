@@ -13,9 +13,6 @@ import {
 } from "recharts";
 
 interface Props {
-  data: {
-    shap_values: Record<string, number>;
-  };
   maxFeatures?: number; // por si quieres limitar al top-k
 }
 
@@ -24,7 +21,7 @@ interface ShapGlobalResponse {
   global_importance: Record<string, number>;
 }
 
-const API_URL = "https://localhost/ml/explain_shap_global";
+const API_URL = "http://0.0.0.0:8000/ml/explain_shap_global";
 
 const ShapFeatureImportanceChart: React.FC<Props> = ({
   maxFeatures = 14,
@@ -41,7 +38,7 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
         setError(null);
 
         const res = await fetch(API_URL, {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },

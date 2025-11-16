@@ -1,5 +1,6 @@
 import { Box, Heading, Text, VStack } from '@chakra-ui/react';
 import './LocalInsights.css';
+import LimeExplanationSplitChart from '../charts/LimeExplanationChart'
 
 export default function LocalInsights() {
   return (
@@ -11,7 +12,7 @@ export default function LocalInsights() {
         <Text color="gray.600">
           Understand how individual predictions are made for specific instances
         </Text>
-        {/* Content will be added here */}
+        <LimeExplanationSplitChart />
       </VStack>
     </Box>
   );
