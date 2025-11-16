@@ -12,6 +12,7 @@ import {
   Cell,
   LabelList,
 } from "recharts";
+import FeatureDetailsModal, {type ShapItem,} from "../PDPPopup/FeatureDetailsModal";
 
 interface Props {
   maxFeatures?: number; // por si quieres limitar al top-k
@@ -34,6 +35,8 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
   const [data, setData] = useState<ShapGlobalResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ShapItem | null>(null);
+
 
   // Llamada al endpoint al montar el componente
   useEffect(() => {
@@ -76,7 +79,7 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
   if (!data) return null;
 
   // 1. Pasar shap_values (objeto) a array
-  const items = Object.entries(data.global_importance)
+  const items: ShapItem[] = Object.entries(data.global_importance)
     .map(([feature, shap]) => ({
       feature,
       shap,
@@ -87,6 +90,7 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
     .slice(0, maxFeatures)
     // 3. invertimos para que la más importante quede abajo
     .reverse();
+
 
   return (
     <div
@@ -144,6 +148,8 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
                 key={idx}
                 // color distinto según si la contribución global es + o -
                 fill={item.shap >= 0 ? "#ffa640" : "#6ab4ff"}
+                cursor="pointer"
+                onClick={() => setSelectedItem(item)}
               />
             ))}
             <LabelList
@@ -155,6 +161,11 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
           </Bar>
         </BarChart>
       </ResponsiveContainer>
+      <FeatureDetailsModal
+        isOpen={!!selectedItem}
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+      />
     </div>
   );
 };
