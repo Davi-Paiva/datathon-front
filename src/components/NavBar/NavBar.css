@@ -8,35 +8,43 @@
   right: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   backdrop-filter: blur(8px);
 }
 
+/* CONTENEDOR PRINCIPAL: flex + repartido */
 .navbar-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;   /* reparte izquierda / centro / derecha */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
-.product-name{
-    display: flex;
-    align-items: center;
-    margin-left: 10%;
+/* Logo / nombre producto */
+.product-name {
+  display: flex;
+  align-items: center;
+  margin-left: 0;                   /* quitamos el 10% fijo */
+  flex-shrink: 0;
 }
 
-.product-name:hover{
-    scale: 1.1;
-    transition: all 0.3s ease;
+.product-name:hover {
+  scale: 1.1;
+  transition: all 0.3s ease;
 }
 
-/* Navigation Links Section */
+/* LINKS CENTRALES: flex en el centro, sin absolute */
 .nav-links {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   gap: 2rem;
+  flex: 1;                          /* ocupa espacio central */
+  justify-content: center;          /* centra los botones */
 }
 
+/* Botones de navegación */
 .nav-links a {
   text-decoration: none;
 }
@@ -72,9 +80,10 @@
   left: 10%;
 }
 
-/* GitHub Slide Menu Section */
+/* Zona derecha: menú GitHub */
 .github-slide-container {
-  padding-right: 10%;
+  padding-right: 0;                 /* fuera el 10% fijo */
+  flex-shrink: 0;
   overflow: hidden;
 }
 
@@ -141,11 +150,9 @@
 .github-slide-menu.expanded .github-repo-button:nth-child(1) {
   transition-delay: 0.05s;
 }
-
 .github-slide-menu.expanded .github-repo-button:nth-child(2) {
   transition-delay: 0.1s;
 }
-
 .github-slide-menu.expanded .github-repo-button:nth-child(3) {
   transition-delay: 0.15s;
 }
@@ -155,14 +162,21 @@
   transform: scale(1.05);
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-  .nav-links {
-    position: static;
-    transform: none;
+  .navbar-container {
+    flex-direction: column;
+    gap: 0.5rem;
   }
-  
-  .navbar-right {
-    display: none;
+
+  .nav-links {
+    flex: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .github-slide-container {
+    align-self: flex-end;
   }
 }
