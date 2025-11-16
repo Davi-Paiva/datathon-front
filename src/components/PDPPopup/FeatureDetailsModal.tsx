@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Box, Button, Text, VStack, HStack, Heading } from "@chakra-ui/react";
 import { FaTimes } from "react-icons/fa";
 import "./FeatureDetailsModal.css";
+import PdpChart from "../charts/PdpChart";
+import AiText from "../AiText/AiText";
 
 export interface ShapItem {
   feature: string;
@@ -44,7 +46,7 @@ export default function FeatureDetailsModal({
       <Box className="modal-content">
         <HStack justify="space-between" mb={4}>
           <Heading size="lg" color="blue.700">
-            Feature Details
+            {item.feature} Details 
           </Heading>
           <Button
             onClick={onClose}
@@ -55,54 +57,21 @@ export default function FeatureDetailsModal({
             <FaTimes />
           </Button>
         </HStack>
-
-        <VStack align="stretch" gap={4}>
-          <Box>
-            <Text fontWeight="bold" fontSize="sm" color="gray.600" mb={1}>
-              Feature:
-            </Text>
-            <Text fontSize="lg" fontWeight="semibold">
-              {item.feature}
-            </Text>
-          </Box>
-
-          <Box>
-            <Text fontWeight="bold" fontSize="sm" color="gray.600" mb={1}>
-              Average Importance |SHAP|:
-            </Text>
-            <Text fontSize="lg" fontWeight="semibold">
-              {item.importance.toFixed(4)}
-            </Text>
-          </Box>
-
-          <Box>
-            <Text fontWeight="bold" fontSize="sm" color="gray.600" mb={1}>
-              Average SHAP (with sign):
-            </Text>
-            <Text fontSize="lg" fontWeight="semibold" color={item.shap >= 0 ? "green.600" : "red.600"}>
-              {item.shap.toFixed(4)}
-            </Text>
-          </Box>
-
-          <Box
-            bg="blue.50"
-            p={4}
-            borderRadius="md"
-            borderLeft="4px solid"
-            borderColor="blue.400"
-          >
-            <Text fontSize="sm" color="gray.700">
-              This feature contributes to the model's predictions. A positive SHAP value indicates
-              it pushes predictions toward "Win", while negative values push toward "Loss".
-            </Text>
-          </Box>
-        </VStack>
-
-        <HStack justify="flex-end" mt={6}>
-          <Button onClick={onClose} colorScheme="blue" size="lg">
-            Close
-          </Button>
-        </HStack>
+        <div
+          style={{
+            width: "100%",
+            height: 420,           // un poco más alto
+            background: "#2e2e2e",
+            padding: 20,
+            color: "#ddd",
+            borderRadius: 8,
+          }}
+        >
+          <PdpChart feature={item.feature} />
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <AiText URL="http://localhost:8000/ai/pdp_sentence"/>
+        </div>
       </Box>
     </Box>
   );
