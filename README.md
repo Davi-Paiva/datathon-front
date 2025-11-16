@@ -1,98 +1,100 @@
 # Datathon Frontend
 
-Frontend application for the Datathon project, built with React, TypeScript, and Vite.
+Frontend del proyecto Datathon, desarrollado con React, TypeScript y Vite.
 
-## 📋 Overview
+## 📋 Resumen
 
-This is the web interface for the Datathon project, providing an intuitive and responsive user experience for data visualization and interaction.
+Interfaz web para visualizar e interactuar con los resultados del proyecto Datathon. Incluye componentes para explicación de modelos (gráficos, LIME/SHAP, etc.), chatbot y formularios de predicción.
 
 ## 🚀 Tech Stack
 
-- **React** - UI library
-- **TypeScript** - Type-safe JavaScript
-- **Vite** - Fast build tool and dev server
-- **ESLint** - Code linting
+- `React` + `TypeScript`
+- `Vite` (dev server y bundling)
+- `ESLint` (linting)
+- `Recharts` (gráficos)
+- `Chakra UI` (componentes UI)
 
-## 📦 Prerequisites
+## 📦 Prerrequisitos
 
-- Node.js (v18 or higher recommended)
-- npm or yarn package manager
+- Node.js (v18 o superior recomendado)
+- `npm` como gestor de paquetes
 
-## 🛠️ Installation
+## 🛠️ Instalación (rápida)
 
-1. Clone the repository:
+1. Clona el repositorio:
 ```bash
 git clone https://github.com/Davi-Paiva/datathon-front.git
 cd datathon-front
 ```
 
-2. Install dependencies:
+2. Instala dependencias base:
 ```bash
 npm install
 ```
 
-## 🏃 Running the Application
+3. Instala dependencias adicionales usadas por el proyecto:
+```bash
+npm install recharts
+npm i @chakra-ui/react @emotion/react
+```
 
-### Development Mode
+4. Agrega snippets de Chakra UI para acelerar el desarrollo:
+```bash
+npx @chakra-ui/cli snippet add
+```
 
-Start the development server with hot reload:
+> Nota: los pasos 3-4 son necesarios porque el proyecto utiliza `Recharts` y componentes de `Chakra UI` en varios componentes dentro de `src/`.
+
+## 🏃 Ejecutar la aplicación
+
+- Modo desarrollo (hot reload):
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
-
-### Build for Production
-
-Create an optimized production build:
+- Build para producción:
 ```bash
 npm run build
 ```
 
-### Preview Production Build
-
-Preview the production build locally:
+- Previsualizar build de producción:
 ```bash
 npm run preview
 ```
 
-## 🧪 Development
+## 🧪 Desarrollo
 
-### Linting
-
-Run ESLint to check code quality:
+- Ejecutar ESLint:
 ```bash
 npm run lint
 ```
 
-## 📁 Project Structure
+## 📁 Estructura principal de carpetas
 
 ```
 datathon-front/
-├── public/          # Static assets
 ├── src/
-│   ├── assets/      # Images, fonts, etc.
-│   ├── App.tsx      # Main application component
-│   ├── App.css      # Application styles
-│   ├── main.tsx     # Application entry point
-│   └── index.css    # Global styles
-├── index.html       # HTML template
-├── package.json     # Dependencies and scripts
-├── tsconfig.json    # TypeScript configuration
-└── vite.config.ts   # Vite configuration
+│   ├── components/    # Componentes React (ChatBot, gráficos, forms, etc.)
+│   ├── pages/         # Páginas principales
+│   ├── services/      # Llamadas a APIs y lógica de ML
+│   └── types/         # Tipos TypeScript
+├── index.html
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
 ```
 
-## 🔗 Related Repositories
+## 🔗 Repositorio del backend
 
-- Backend API: [https://github.com/ppuig2503/datathon2025-backend-JAPD.git]
+- Backend API: `https://github.com/ppuig2503/datathon2025-backend-JAPD.git`
 
-## 👥 Contributors
+## 👥 Colaboradores
 
 - Alejandro Poole
 - Davi Paiva
 - Joan Vicente
 - Pau Puig
 
-## 📄 License
+## 📄 Licencia
 
-This project is part of a Datathon competition.
+Proyecto desarrollado para la competición Datathon.
