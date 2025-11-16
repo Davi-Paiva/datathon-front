@@ -29,7 +29,7 @@ const features = [
 export default function HomePage() {
   return (
     <Box className="home-page">
-      <Container maxW="container.xl" className="home-container">
+      <Container maxW="full" className="home-container">
         <VStack gap={12}>
           <HeroSection />
           

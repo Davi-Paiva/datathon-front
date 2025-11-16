@@ -13,7 +13,7 @@ class MLService {
    */
   async predict(input: PredictionInput): Promise<PredictionResponse> {
     try {
-      const response = await fetch(`${API_BASE_URL}/predict`, {
+      const response = await fetch(`${API_BASE_URL}/ml/predict`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

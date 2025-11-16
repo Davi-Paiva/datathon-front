@@ -5,7 +5,8 @@
   background: rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   backdrop-filter: blur(10px);
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .examples-scroll-container::-webkit-scrollbar {
@@ -36,7 +37,7 @@
   overflow-x: auto;
 }
 
-.copy-button {
+.load-button {
   position: sticky;
   right: 8px;
   z-index: 10;

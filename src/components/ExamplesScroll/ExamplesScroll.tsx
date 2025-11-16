@@ -1,18 +1,20 @@
 import { Box, Card, Text, Flex, Heading, IconButton } from '@chakra-ui/react';
-import { FaCopy } from 'react-icons/fa';
+import { FaArrowDown } from 'react-icons/fa';
 import data_examples from '../../data/example_data';
 import { toaster } from '../ui/toaster';
 import './ExamplesScroll.css';
 
-export default function ExamplesScroll() {
-  const handleCopy = (example: Record<string, number>) => {
-    const jsonString = JSON.stringify(example, null, 2);
-    navigator.clipboard.writeText(jsonString).then(() => {
-      toaster.create({
-        title: 'Copied to clipboard!',
-        type: 'success',
-        duration: 2000,
-      });
+interface ExamplesScrollProps {
+  onLoadExample: (example: Record<string, number>) => void;
+}
+
+export default function ExamplesScroll({ onLoadExample }: ExamplesScrollProps) {
+  const handleLoadExample = (example: Record<string, number>) => {
+    onLoadExample(example);
+    toaster.create({
+      title: 'Example loaded to form!',
+      type: 'success',
+      duration: 2000,
     });
   };
 
@@ -38,14 +40,14 @@ export default function ExamplesScroll() {
                 </Box>
               ))}
               <IconButton
-                aria-label="Copy to clipboard"
+                aria-label="Load to form"
                 size="sm"
-                className="copy-button"
-                onClick={() => handleCopy(example)}
+                className="load-button"
+                onClick={() => handleLoadExample(example)}
                 colorScheme="blue"
                 flexShrink={0}
               >
-                <FaCopy />
+                <FaArrowDown />
               </IconButton>
             </Flex>
           </Card.Body>
