@@ -4,7 +4,7 @@ import App from './App.tsx'
 import { Provider } from "./components/ui/provider"
 
 createRoot(document.getElementById('root')!).render(
-  <Provider>
+  <Provider forcedTheme="light">
     <App />
   </Provider>
 )
