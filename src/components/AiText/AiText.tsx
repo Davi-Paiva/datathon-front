@@ -6,9 +6,10 @@ import "./AIText.css";
 interface AiTextProps {
   URL: string;
   shouldLoad?: boolean;
+  onLoadComplete?: () => void;
 }
 
-export default function AiText({ URL, shouldLoad = true }: AiTextProps) {
+export default function AiText({ URL, shouldLoad = true, onLoadComplete }: AiTextProps) {
   const [text, setText] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +23,9 @@ export default function AiText({ URL, shouldLoad = true }: AiTextProps) {
         setError(null);
         const result = await aiService.getText(URL);
         setText(result);
+        if (onLoadComplete) {
+          onLoadComplete();
+        }
       } catch (err: any) {
         console.error(err);
         setError(err.message ?? "Error loading explanation");
@@ -31,6 +35,7 @@ export default function AiText({ URL, shouldLoad = true }: AiTextProps) {
     };
 
     fetchText();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [URL, shouldLoad]);
 
   if (!shouldLoad || loading) {

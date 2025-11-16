@@ -1,15 +1,26 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Box, Container, Heading, VStack } from '@chakra-ui/react';
 import LocalInsights from '../../components/LocalInsights/LocalInsights';
 import GlobalInsights from '../../components/GlobalInsights/GlobalInsights';
 import './ExplainabilityPageStyles.css';
 import ChatBot from '../../components/ChatBot/ChatBot';
+import CounterfactualSection from '../../components/CounterfactualSection/CounterfactualSection';
 
 export default function ExplainabilityPage() {
+  const [searchParams] = useSearchParams();
+  const predictionParam = searchParams.get('prediction');
+  const prediction = predictionParam === 'true' ? true : predictionParam === 'false' ? false : null;
+  
   const [localInsightsComplete, setLocalInsightsComplete] = useState(false);
+  const [globalInsightsComplete, setGlobalInsightsComplete] = useState(false);
 
   const handleLocalInsightsComplete = () => {
     setLocalInsightsComplete(true);
+  };
+
+  const handleGlobalInsightsComplete = () => {
+    setGlobalInsightsComplete(true);
   };
 
   return (
@@ -22,7 +33,12 @@ export default function ExplainabilityPage() {
         </Box>
 
         <LocalInsights onLoadComplete={handleLocalInsightsComplete} />
-        <GlobalInsights shouldLoad={localInsightsComplete} />
+        <GlobalInsights shouldLoad={localInsightsComplete} onLoadComplete={handleGlobalInsightsComplete} />
+        
+        {prediction === false && localInsightsComplete && globalInsightsComplete && (
+          <CounterfactualSection prediction={prediction} />
+        )}
+        
         <ChatBot />
       </VStack>
     </Container>
