@@ -1,5 +1,6 @@
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import './PredictionResult.css';
+import { Link } from 'react-router-dom';
 
 interface PredictionResultProps {
   prediction: number;
@@ -25,15 +26,17 @@ export default function PredictionResult({ prediction }: PredictionResultProps) 
             {prediction}
           </Text>
         </Box>
-        <Button 
-          colorScheme={isWin ? 'green' : 'red'} 
-          size="lg"
-          width="full"
-          maxW="300px"
-          className="understand-button"
-        >
-          Understand the Results
-        </Button>
+        <Link to="/explainability">
+          <Button 
+            colorScheme={isWin ? 'green' : 'red'} 
+            size="lg"
+            width="full"
+            maxW="300px"
+            className="understand-button"
+          >
+            Understand the Results
+          </Button>
+        </Link>
       </VStack>
     </Box>
   );
