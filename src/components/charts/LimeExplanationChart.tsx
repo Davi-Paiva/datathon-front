@@ -79,7 +79,7 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
     fetchLimeExplanation();
   }, [onLoadComplete]);
 
-  if (loading) return <Skeleton height="400px" />;
+  if (loading) return <Skeleton height="400px" variant="shine" />;
   if (error) return <div>Error al cargar explicación LIME: {error}</div>;
   if (!limeData) return null;
 

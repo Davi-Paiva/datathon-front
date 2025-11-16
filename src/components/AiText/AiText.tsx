@@ -36,7 +36,7 @@ export default function AiText({ URL, shouldLoad = true }: AiTextProps) {
   if (!shouldLoad || loading) {
     return (
       <Box as="blockquote" className="ai-text-container">
-        <SkeletonText noOfLines={10}/>
+        <SkeletonText noOfLines={10} variant="shine" />
       </Box>
     );
   }

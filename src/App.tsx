@@ -3,6 +3,7 @@ import { Box } from '@chakra-ui/react';
 import PredictionPage from './pages/PredictionPage/PredictionPage';
 import HomePage from './pages/HomePage/HomePage';
 import ExplainabilityPage from './pages/ExplainabilityPage/ExplainabilityPage';
+import InformationPage from './pages/InformationPage/InformationPage';
 import NavBar from './components/NavBar/NavBar';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/predict" element={<PredictionPage />} />
             <Route path="/explainability" element={<ExplainabilityPage />} />
+            <Route path="/information" element={<InformationPage />} />
           </Routes>
         </Box>
       </Box>

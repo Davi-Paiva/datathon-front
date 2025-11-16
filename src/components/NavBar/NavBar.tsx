@@ -29,6 +29,11 @@ export default function NavBar() {
                 Prediction
               </Button>
             </Link>
+            <Link to="/information">
+              <Button className="navbar-button" variant="ghost" size="md">
+                Information
+              </Button>
+            </Link>
           </HStack>
 
           {/* Right Section - GitHub Slide Menu */}
