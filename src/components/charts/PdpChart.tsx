@@ -31,7 +31,7 @@ interface PdpChartProps {
 
 const API_URL = "http://localhost:8000/ml/explain_pdp";
 
-const PdpChart: React.FC<PdpChartProps> = ({ feature, height = 360 }) => {
+const PdpChart: React.FC<PdpChartProps> = ({ feature }) => {
   const [pdpData, setPdpData] = useState<PdpResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
