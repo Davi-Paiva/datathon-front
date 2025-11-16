@@ -143,7 +143,7 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
             <BarChart
               data={negatives}
               layout="vertical"
-              margin={{ top: 10, right: 100, left: 0, bottom: 10 }}
+              margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
             >
               <CartesianGrid
                 strokeDasharray="3 3"

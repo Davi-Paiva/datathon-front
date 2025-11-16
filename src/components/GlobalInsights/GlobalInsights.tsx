@@ -1,6 +1,7 @@
 import { Box, Heading, Text, VStack } from '@chakra-ui/react';
 import './GlobalInsights.css';
 import ShapFeatureImportanceChart from '../charts/ShapFeatureImportanceChart'
+import AIText from '../../services/AIText';
 
 export default function GlobalInsights() {
   return (
@@ -9,10 +10,8 @@ export default function GlobalInsights() {
         <Heading size="lg" color="blue.700">
           Global Insights
         </Heading>
-        <Text color="gray.600">
-          Explore overall model behavior and feature importance across all predictions
-        </Text>
         <ShapFeatureImportanceChart/>
+        <AIText URL="http://localhost:8000/ai/text/global" />
       </VStack>
     </Box>
   );
