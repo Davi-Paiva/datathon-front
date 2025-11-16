@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -15,17 +15,68 @@ interface Props {
   maxFeaturesPerSide?: number;
 }
 
+interface LimeResponse {
+  prediction: number;
+  probability: number;
+  explanation: Record<string, number>;
+}
+
 type Item = {
   feature: string;
   value: number;     // negativo o positivo (tal cual LIME)
   absValue: number;  // magnitud para etiquetas
 };
 
+const API_URL = "https://localhost/ml/explain_lime_local";
+
 const LimeExplanationSplitChart: React.FC<Props> = ({
-  explanation,
   maxFeaturesPerSide = 7,
 }) => {
-  const entries = Object.entries(explanation);
+  const [limeData, setLimeData] = useState<LimeResponse | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Llamada al endpoint al montar el componente
+  useEffect(() => {
+    const fetchLimeExplanation = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const res = await fetch(API_URL, {
+          method: "GET", // o "POST" si tu endpoint lo requiere
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: JSON.stringify(payload)  // si necesitas enviar algo
+        });
+
+        if (!res.ok) {
+          throw new Error(`Error HTTP ${res.status}`);
+        }
+
+        const json = (await res.json()) as LimeResponse;
+        setLimeData(json);
+      } catch (err: any) {
+        console.error(err);
+        setError(err.message ?? "Error al cargar explicación LIME");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLimeExplanation();
+  }, []);
+
+  if (loading) return <div>Cargando explicación LIME...</div>;
+  if (error) return <div>Error al cargar explicación LIME: {error}</div>;
+  if (!limeData) return null;
+
+  // ============================
+  // A partir de aquí va tu lógica
+  // ============================
+
+  const entries = Object.entries(limeData.explanation);
 
   const negatives: Item[] = entries
     .filter(([, v]) => v < 0)
