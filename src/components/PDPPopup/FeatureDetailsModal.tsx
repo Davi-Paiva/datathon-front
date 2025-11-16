@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Box, Button, Text, VStack, HStack, Heading } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading } from "@chakra-ui/react";
 import { FaTimes } from "react-icons/fa";
 import "./FeatureDetailsModal.css";
 import PdpChart from "../charts/PdpChart";

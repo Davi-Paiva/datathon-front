@@ -15,12 +15,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/predict" element={<PredictionPage />} />
-<<<<<<< Updated upstream
             <Route path="/explainability" element={<ExplainabilityPage />} />
             <Route path="/information" element={<InformationPage />} />
-=======
-            <Route path="/explainability" element={<ExplainabilityPage/>} />
->>>>>>> Stashed changes
           </Routes>
         </Box>
       </Box>
