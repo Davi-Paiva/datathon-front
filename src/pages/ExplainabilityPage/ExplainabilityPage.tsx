@@ -2,6 +2,7 @@ import { Box, Container, VStack, Heading, Text } from '@chakra-ui/react';
 import LocalInsights from '../../components/LocalInsights/LocalInsights';
 import GlobalInsights from '../../components/GlobalInsights/GlobalInsights';
 import './ExplainabilityPageStyles.css';
+import ChatBot from '../../components/ChatBot/ChatBot';
 
 export default function ExplainabilityPage() {
   return (
@@ -19,6 +20,7 @@ export default function ExplainabilityPage() {
 
           <GlobalInsights />
           <LocalInsights />
+          <ChatBot />
         </VStack>
       </Container>
     </Box>
