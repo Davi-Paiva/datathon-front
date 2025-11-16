@@ -84,7 +84,7 @@ datathon-front/
 
 ## 🔗 Related Repositories
 
-- Backend API: [Link to backend repository if available]
+- Backend API: [https://github.com/ppuig2503/datathon2025-backend-JAPD.git]
 
 ## 👥 Contributors
 
