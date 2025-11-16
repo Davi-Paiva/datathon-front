@@ -95,7 +95,7 @@ const ShapFeatureImportanceChart: React.FC<Props> = ({
         <BarChart
           data={items}
           layout="vertical"
-          margin={{ top: 20, right: 40, left: 10, bottom: 20 }}
+          margin={{ top: 20, right: 40, left: 20, bottom: 20 }}
         >
           <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#555" />
 

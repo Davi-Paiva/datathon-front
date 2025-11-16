@@ -26,6 +26,13 @@ type Item = {
   absValue: number;  // magnitud para etiquetas
 };
 
+const cleanFeatureLabel = (raw: string): string => {
+  const matches = raw.match(/[A-Za-z_][A-Za-z0-9_]*/g);
+  if (!matches || matches.length === 0) return raw;
+  // normalmente el nombre de la feature será el ÚLTIMO identificador
+  return matches[matches.length - 1];
+};
+
 const API_URL = "http://0.0.0.0:8000/ml/explain_lime";
 
 const LimeExplanationSplitChart: React.FC<Props> = ({
@@ -154,6 +161,7 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
                 orientation="right"
                 width={200}
                 tick={{ fill: "#ddd", fontSize: 12 }}
+                tickFormatter={(value) => cleanFeatureLabel(value as string)}
               />
               <Tooltip
                 formatter={(value: number) => value.toFixed(3)}
@@ -195,6 +203,7 @@ const LimeExplanationSplitChart: React.FC<Props> = ({
                 dataKey="feature"
                 width={200}
                 tick={{ fill: "#ddd", fontSize: 14 }}
+                tickFormatter={(value) => cleanFeatureLabel(value as string)}
               />
               <Tooltip
                 formatter={(value: number) => value.toFixed(3)}
